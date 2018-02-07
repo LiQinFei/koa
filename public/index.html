@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+<div id="app">
+    qq
+    <ul>
+        <li v-for="item in getData()">
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            datas:[],
+            list:[{id:1},{id:2}]
+        }, methods:{
+            getData:function (){
+//                var datas = []
+                let _this = this
+                $.ajax({
+                    type:'POST',
+                    url:'/index',
+                    dataType:'json',
+                    success:function(data){
+                       console.log(data)
+                        _this.datas = data
+                    },
+                    error:function(jqXHR){
+                        //请求失败函数内容
+                    }
+                });
+            }
+        }
+    })
+</script>
+</html>
